@@ -4,7 +4,7 @@
         <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <UserSecretsId>aspnet-KlantenBestelling.Rest-F582ACCA-CE98-4F15-9508-E1F397B0316C</UserSecretsId>
+        <UserSecretsId>aspnet-RestaurantReservatie.Rest-F582ACCA-CE98-4F15-9508-E1F397B0316C</UserSecretsId>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
