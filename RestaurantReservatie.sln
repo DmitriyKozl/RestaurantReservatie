@@ -1,12 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KlantBestelling.DL", "KlantBestelling.DL\KlantBestelling.DL.csproj", "{5577B2D2-CE57-4D41-8B2F-5BD8A996BFDC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantReservatie.DL", "RestaurantReservatie.DL\RestaurantReservatie.DL.csproj", "{5577B2D2-CE57-4D41-8B2F-5BD8A996BFDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Klantenbestelling.BL", "Klantenbestelling.BL\Klantenbestelling.BL.csproj", "{C63E87D4-B3B0-4132-A8BD-16B2ABAE1CC5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantReservatie.BL", "RestaurantReservatie.BL\RestaurantReservatie.BL.csproj", "{C63E87D4-B3B0-4132-A8BD-16B2ABAE1CC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KlantenBestelling.Rest", "KlantenBestelling.Rest\KlantenBestelling.Rest.csproj", "{10CC422F-CDD9-43E3-A42A-E7FE69B862EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantReservatie.Rest", "RestaurantReservatie.Rest\RestaurantReservatie.Rest.csproj", "{10CC422F-CDD9-43E3-A42A-E7FE69B862EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Klantenbestelling.XUnit", "Klantenbestelling.XUnit\Klantenbestelling.XUnit.csproj", "{8E13BE80-3817-44EC-BCC2-7016DAE44184}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantReservatie.XUnit", "RestaurantReservatie.XUnit\RestaurantReservatie.XUnit.csproj", "{8E13BE80-3817-44EC-BCC2-7016DAE44184}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
