@@ -21,4 +21,8 @@ public class ContactInfo_Data {
 
     [ForeignKey("LocationId")]
     public Location_Data Location { get; set; }
+    
+    public ContactInfo_Data() {
+        
+    }
 }

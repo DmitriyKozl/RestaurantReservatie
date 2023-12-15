@@ -20,5 +20,14 @@ public class Customer_Data {
 
     // Navigation property for Reservations
     public virtual ICollection<Reservation> Reservations { get; set; }
+    
+    public Customer_Data(string name, ContactInfo contactInfo) {
+        Name = name;
+        ContactInfo = contactInfo;
+    }
+    
+    public Customer_Data() {
+        
+    }
 
 }

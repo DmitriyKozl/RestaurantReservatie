@@ -6,27 +6,29 @@ namespace RestaurantReservatie.DL.Models;
 
 public class Reservation_Data {
     [Key]
-    public int Id { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int ReservationID { get; set; }
 
-    // Foreign keys for Customer and Restaurant
-    public int CustomerId { get; set; }
-    public int RestaurantId { get; set; }
+    public int  RestaurantId { get; set; }
+    
+    
 
-    [ForeignKey("CustomerId")]
-    public Customer Customer { get; set; }
-
-    [ForeignKey("RestaurantId")]
-    public Restaurant_Data Restaurant { get; set; }
+    public Customer_Data Customer { get; set; }
 
     [Required]
-    public int NumberOfPersons { get; set; }
+    public int AmoutOfPeople { get; set; }
 
     [Required]
     public DateTime Date { get; set; }
 
     [Required]
-    public DateTime Time { get; set; }
+    public TimeSpan StartTime { get; set; }
 
-    [Required]
     public int TableNumber { get; set; }
+    
+    public Restaurant_Data Restaurant { get; set; }
+    
+    public Reservation_Data() {
+        
+    }
 }

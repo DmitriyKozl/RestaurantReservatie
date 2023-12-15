@@ -19,4 +19,14 @@ public class Restaurant_Data {
 
     // Navigation property for Reservations
     public virtual ICollection<Reservation_Data> Reservations { get; set; }
+    
+    
+    public Restaurant_Data(string name, Location_Data location) {
+        Name = name;
+        Location = location;
+    }
+    
+    public Restaurant_Data() {
+        
+    }
 }
