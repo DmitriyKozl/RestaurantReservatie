@@ -2,32 +2,34 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using RestaurantReservatie.BL.Models;
 
-namespace RestaurantReservatie.DL.Models; 
+namespace RestaurantReservatie.DL.Models;
 
 public class Customer_Data {
-    [Key]
-    public int Id { get; set; }
+    [Key] public int CustomerId { get; set; }
+    [Required] public string Name { get; set; }
+    [Required] public string Email { get; set; }
+    [Required] public string Phone { get; set; }
+    [Required] public Location_Data Location { get; set; }
 
-    [Required]
-    [MaxLength(100)]
-    public string Name { get; set; }
+    public bool Deleted { get; set; }
 
-    // Foreign key for ContactInfo
-    public int ContactInfoId { get; set; }
-
-    [ForeignKey("ContactInfoId")]
-    public ContactInfo ContactInfo { get; set; }
-
-    // Navigation property for Reservations
-    public virtual ICollection<Reservation> Reservations { get; set; }
-    
-    public Customer_Data(string name, ContactInfo contactInfo) {
+    public Customer_Data(int customerId, string name, string email, string phone, Location_Data locatie) {
+        CustomerId = customerId;
         Name = name;
-        ContactInfo = contactInfo;
-    }
-    
-    public Customer_Data() {
-        
+        Email = email;
+        Phone = phone;
+        Location = locatie;
+        Deleted = false;
     }
 
+    public Customer_Data(string name, string email, string phone, Location_Data locatie) {
+        Name = name;
+        Email = email;
+        Phone = phone;
+        Location = locatie;
+        Deleted = false;
+    }
+
+
+    public Customer_Data() { }
 }

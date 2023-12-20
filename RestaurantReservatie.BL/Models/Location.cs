@@ -3,75 +3,45 @@
 namespace RestaurantReservatie.BL.Models;
 
 public class Location {
-    private const char splitChar = '|';
+    public int LocationId { get; set; }
+    public string City { get; set; }
+    public string Street { get; set; }
+    public string PostalCode { get; set; }
+    public string HouseNumber { get; set; }
 
-    public Location(string addressLine) {
-        string[] parts = addressLine.Split(splitChar);
-        City = parts[0];
-        Street = parts[2];
-        PostalCode = parts[1];
-        HouseNumber = parts[3];
+
+    public Location(string city, string postalCode) {
+        SetCity(city);
+        SetPostalCode(postalCode);
     }
 
-    public Location(string city, string street, string postalCode, string houseNumber) {
-        City = city;
+    public Location(string postalCode, string city, string street, string houseNumber, int locationId) : this(
+         city,postalCode) {
         Street = street;
-        PostalCode = postalCode;
+        HouseNumber = houseNumber;
+        LocationId = locationId;
+    }
+
+    public Location(string postalCode, string city, string street, string houseNumber) : this(
+        city,postalCode) {
+        Street = street;
         HouseNumber = houseNumber;
     }
 
-    private string _city;
 
-    public string City {
-        get { return _city; }
-        set {
-            if (string.IsNullOrWhiteSpace(value)) throw new LocationException("City can not be empty");
-            _city = value;
-        }
+    public void SetPostalCode(string postalcode) {
+        if (string.IsNullOrWhiteSpace(postalcode))
+            throw new LocationException("ZetPostcode - Postcode mag niet leeg zijn");
+        PostalCode = postalcode;
     }
 
-    private string _postalCode;
-
-    public string PostalCode {
-        get => _postalCode;
-        set {
-            if (string.IsNullOrWhiteSpace(value)) {
-                throw new LocationException("Postal code cannot be empty");
-            }
-
-            if (value.Length != 4) {
-                throw new LocationException("Postal code must be 4 characters long");
-            }
-
-            _postalCode = value;
-        }
-    }
-
-    private string _houseNumber;
-
-    public string HouseNumber {
-        get { return _houseNumber; }
-        set {
-            if (string.IsNullOrWhiteSpace(value)) throw new LocationException("HouseNumber is empty");
-            _houseNumber = value;
-        }
-    }
-
-    private string _street;
-
-    public string Street {
-        get { return _street; }
-        set {
-            if (string.IsNullOrWhiteSpace(value)) throw new LocationException("Street is empty");
-            _street = value;
-        }
+    public void SetCity(string city) {
+        if (string.IsNullOrWhiteSpace(city))
+            throw new LocationException("ZetGemeenteNaam - GemeenteNaam mag niet leeg zijn");
+        City = city;
     }
 
     public override string ToString() {
         return $"{City} [{PostalCode}] - {Street} - {HouseNumber}";
-    }
-
-    public string ToAddressLine() {
-        return $"{City}{splitChar}{PostalCode}{splitChar}{Street}{splitChar}{HouseNumber}";
     }
 }

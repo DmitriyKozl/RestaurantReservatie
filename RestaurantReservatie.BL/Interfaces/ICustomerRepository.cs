@@ -3,7 +3,14 @@
 namespace RestaurantReservatie.BL.Interfaces; 
 
 public interface ICustomerRepository {
-    void UpdateCustomer(Customer customer);
+    Customer UpdateCustomer(Customer customer);
     void DeleteCustomer(int id);
-    List<Customer> GetCustomers(string filter);
-    void AddCustomer(Customer customer); }
+    Customer GetCustomer(int id);
+    
+    List<Customer> GetAllCustomers();
+    Customer AddCustomer(Customer customer);
+   bool CustomerExists(int id);} 
+
+
+
+  

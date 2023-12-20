@@ -2,33 +2,40 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using RestaurantReservatie.BL.Models;
 
-namespace RestaurantReservatie.DL.Models; 
+namespace RestaurantReservatie.DL.Models;
 
 public class Reservation_Data {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int ReservationID { get; set; }
-
-    public int  RestaurantId { get; set; }
+    [Key] public int Id { get; set; }
+    [Required] public Restaurant_Data RestaurantData { get; set; }
+    [Required] public Customer_Data CustomerData { get; set; }
+    [Required] public int Party { get; set; }
+    [Required] public DateTime Date { get; set; }
     
-    
+    [Required] public DateTime Time { get; set; }
+    [Required] public int TableNumber { get; set; }
 
-    public Customer_Data Customer { get; set; }
+    public bool Deleted { get; set; }
 
-    [Required]
-    public int AmoutOfPeople { get; set; }
-
-    [Required]
-    public DateTime Date { get; set; }
-
-    [Required]
-    public TimeSpan StartTime { get; set; }
-
-    public int TableNumber { get; set; }
-    
-    public Restaurant_Data Restaurant { get; set; }
-    
-    public Reservation_Data() {
-        
+    public Reservation_Data(int id, Restaurant_Data restaurantData, Customer_Data customerData, int party,
+        DateTime date, int tableNumber) {
+        Id = id;
+        RestaurantData = restaurantData;
+        CustomerData = customerData;
+        Party = party;
+        Date = date;
+        TableNumber = tableNumber;
+        Deleted = false;
     }
+
+    public Reservation_Data(Restaurant_Data restaurantData, Customer_Data customerData, int party, DateTime date,
+        int tableNumber) {
+        RestaurantData = restaurantData;
+        CustomerData = customerData;
+        Party = party;
+        Date = date;
+        TableNumber = tableNumber;
+        Deleted = false;
+    }
+
+    public Reservation_Data() { }
 }

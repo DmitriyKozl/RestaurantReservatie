@@ -1,83 +1,79 @@
 ﻿using System.Formats.Asn1;
+using System.Text.RegularExpressions;
 using RestaurantReservatie.BL.Exceptions;
 
 namespace RestaurantReservatie.BL.Models;
 
 public class Restaurant {
-//View available tables for a specific date, optionally with location and cuisine.
+        public int RestaurantId { get;  set; }
+        public string RestaurantName { get; private set; }
+        public Location Location { get; set; }
+        public string Cuisine { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        public List<Table> Tables { get; private set; }
 
-public Restaurant(string name, string cuisine, string description, ContactInfo contactInfo, int tables) {
-        Name = name;
-        Description = description;
-        Cuisine = cuisine;
-        ContactInfo = contactInfo;
-        Tables = tables;
-    }
-    
-
-    public Restaurant(int restaurantId, string name, string cuisine, string description, ContactInfo contactInfo, int tables)
-        : this(name, cuisine, description, contactInfo, tables) {
-        RestaurantId = restaurantId;
-    }
-
-    private string _cuisine;
-    private int _restaurantId;
-    private string _name;
-    private string _description;
-    private ContactInfo _contactInfo;
-    private int _tables;
-    
-    public int Tables {
-        get { return _tables; }
-        set {
-            if (value <= 0) throw new RestaurantException("invalid tables");
-            _tables = value;
+        public Restaurant(string restaurantName, Location location, string cuisine, string phone, string email)
+        {
+            ZetNaam(restaurantName);
+            Location = location;
+            Cuisine = cuisine;
+            ZetTelefoonnummer(phone);
+            ZetEmail(email);
         }
-    }
 
-    public string Cuisine {
-        get { return _cuisine; }
-        set {
-            if (string.IsNullOrWhiteSpace(value)) throw new RestaurantException("cuisine is empty");
-            _cuisine = value;
+        public Restaurant(int restaurantId, string restaurantName, Location location, string cuisine, string phone, string email, List<Table> tables)
+        {
+            RestaurantId = restaurantId;
+            RestaurantName = restaurantName;
+            Location = location;
+            Cuisine = cuisine;
+            Phone = phone;
+            Email = email;
+             Tables = tables;
         }
-    }
 
-    public int RestaurantId {
-        get { return _restaurantId; }
-        set {
-            if (value <= 0) throw new RestaurantException("invalid id");
-            _restaurantId = value;
+        public Restaurant(int restaurantId, string restaurantName, Location location, string cuisine, string phone, string email)
+        {
+            RestaurantId = restaurantId;
+            RestaurantName = restaurantName;
+            Location = location;
+            Cuisine = cuisine;
+            Phone = phone;
+            Email = email;
         }
-    }
 
-    public string Name {
-        get { return _name; }
-        set {
-            if (string.IsNullOrWhiteSpace(value)) throw new RestaurantException("name is empty");
-            _name = value;
+        public Restaurant()
+        {
         }
-    }
 
-    public string Description {
-        get { return _description; }
-        set {
-            if (string.IsNullOrWhiteSpace(value)) throw new RestaurantException("description is empty");
-            _description = value;
+        public void ZetNaam(string restaurantName)
+        {
+            if (string.IsNullOrWhiteSpace(restaurantName)) throw new RestaurantException("Naam mag niet leeg zijn");
+            RestaurantName = restaurantName;
         }
-    }
+        public void ZetEmail(string email) {
+            if (string.IsNullOrWhiteSpace(email)) throw new CustomerException("ZetEmail - Email mag niet leeg zijn");
+            if (!Regex.IsMatch(email,
+                    @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"))
+                throw new CustomerException(
+                    "ZetEmail - Email is niet geldig");
+            Email = email;
+        }
 
 
-    public ContactInfo ContactInfo { get; set; }
+        public void ZetTelefoonnummer(string phone) {
+            if (string.IsNullOrWhiteSpace(phone))
+                throw new CustomerException("ZetTelefoonnummer - Telefoonnummer mag niet leeg zijn");
+            if (!Regex.IsMatch(phone, @"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$"))
+                throw new CustomerException("ZetTelefoonnummer - Telefoonnummer is niet geldig");
+            Phone = phone;
+        }
 
-    public override string ToString() {
-        return $"{RestaurantId}: {Name}, Description: {Description}, Location: {ContactInfo}";
-    }
-
-    public override bool Equals(object obj) {
-        if (obj == null) return false;
-        if (obj.GetType() != GetType()) return false;
-        var restaurant = (Restaurant)obj;
-        return restaurant.RestaurantId == RestaurantId;
-    }
+        public void ZetId(int restaurantId)
+        {
+            if (restaurantId < 0) throw new RestaurantException("ZetId - Id mag niet kleiner zijn dan 0");
+            RestaurantId = restaurantId;
+        }
+        
 }
