@@ -24,9 +24,15 @@ public class CustomerManager {
     }
 
     public Customer GetCustomer(int id) {
-        return _customerRepository.GetCustomer( id);
+        try {
+            if (id < 0) throw new CustomerManagerException("GetCustomer - GebruikerId mag niet kleiner dan 0 zijn");
+            return _customerRepository.GetCustomer(id);
+        }
+        catch (Exception ex) {
+            throw new CustomerManagerException("GetCustomer - Er is een fout opgetreden", ex);
+        }
     }
-    
+
     public List<Customer> GetAllCustomers() {
         try {
             return _customerRepository.GetAllCustomers();
@@ -37,28 +43,30 @@ public class CustomerManager {
     }
 
     public void DeleteCustomer(int id) {
-        try
-        {
+        try {
             if (id == null) throw new CustomerManagerException("DeleteCustomer - Gebruiker mag niet null zijn");
-            if (!_customerRepository.CustomerExists(id)) throw new CustomerManagerException("VerwijderGebruiker - Gebruiker bestaat niet");
+            if (!_customerRepository.CustomerExists(id))
+                throw new CustomerManagerException("VerwijderGebruiker - Gebruiker bestaat niet");
+            if (_customerRepository.CustomerHasReservation(id))
+                throw new CustomerManagerException("DeleteCustomer - Gebruiker heeft nog reservaties");
             _customerRepository.DeleteCustomer(id);
         }
-        catch (Exception ex)
-        {
+        catch (Exception ex) {
             throw new CustomerManagerException("DeleteCustomer - Er is een fout opgetreden", ex);
-        }    }
+        }
+    }
 
     public Customer UpdateCustomer(Customer customer) {
-        try
-        {
+        try {
             if (customer == null) throw new CustomerManagerException("UpdateGebruiker - Gebruiker mag niet null zijn");
-            if (!_customerRepository.CustomerExists(customer.CustomerId)) throw new CustomerManagerException("UpdateGebruiker - Gebruiker bestaat niet");
+            if (!_customerRepository.CustomerExists(customer.CustomerId))
+                throw new CustomerManagerException("UpdateGebruiker - Gebruiker bestaat niet");
             return _customerRepository.UpdateCustomer(customer);
         }
-        catch (Exception ex)
-        {
+        catch (Exception ex) {
             throw new CustomerManagerException("UpdateCustomer - Er is een fout opgetreden", ex);
-        }    }
+        }
+    }
 
     public bool CustomerExists(int id) {
         try {
@@ -67,6 +75,17 @@ public class CustomerManager {
         }
         catch (Exception ex) {
             throw new CustomerManagerException("CustomerExists - Er is een fout opgetreden", ex);
+        }
+    }
+
+    public bool CustomerHasReservation(int customerId) {
+        try {
+            if (customerId < 0)
+                throw new CustomerManagerException("CustomerHasReservation - Id mag niet kleiner dan 0 zijn");
+            return _customerRepository.CustomerHasReservation(customerId);
+        }
+        catch (Exception ex) {
+            throw new CustomerManagerException("CustomerHasReservation - Er is een fout opgetreden", ex);
         }
     }
 }

@@ -14,11 +14,12 @@ public class CustomerMapper {
 
 
     public static Customer MapToDomain(Customer_Data customerdb) {
-        try {
-            return new Customer(customerdb.CustomerId, customerdb.Name, customerdb.Phone,
-                LocationMapper.MapToDomain(customerdb.Location), customerdb.Email);
+        try
+        {
+            return new Customer(customerdb.CustomerId, customerdb.Name, customerdb.Email, LocationMapper.MapToDomain(customerdb.Location), customerdb.Phone);
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             throw new MapperException("MapToDomain", e);
         }
     }

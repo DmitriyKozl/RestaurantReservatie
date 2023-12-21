@@ -24,47 +24,43 @@ public class CustomerRepository : ICustomerRepository {
         try {
             _context.Customer.Update(CustomerMapper.MapToDB(customer, _context));
             SaveAndClear();
-            return CustomerMapper.MapToDomain(_context.Customer.Include(g => g.Location).OrderBy(g => g.CustomerId)
+            return CustomerMapper.MapToDomain(_context.Customer.Include(c => c.Location).OrderBy(c => c.CustomerId)
                 .Last());
         }
         catch (Exception ex) {
-            throw new RepositoryException("UpdateCustomer - Er is een fout opgetreden", ex);
+            throw new RepositoryException("UpdateGebruiker - Er is een fout opgetreden", ex);
         }
     }
 
     public void DeleteCustomer(int id) {
         try {
-            Customer_Data g = _context.Customer.Find(id);
-            g.Deleted = true;
-            _context.Customer.Update(g);
+            Customer_Data customerdata = _context.Customer.Find(id);
+            customerdata.Deleted = true;
+            _context.Customer.Update(customerdata);
             SaveAndClear();
         }
         catch (Exception ex) {
-            throw new RepositoryException("DeleteCustomer - Er is een fout opgetreden", ex);
+            throw new RepositoryException("VerwijderGebruiker - Er is een fout opgetreden", ex);
         }
     }
 
     public Customer GetCustomer(int id) {
         try {
-            return CustomerMapper
-                .MapToDomain(_context.Customer
-                    .Include(g => g.Location).First(g => g.CustomerId == id));
+            return CustomerMapper.MapToDomain(_context.Customer
+                .Include(customer => customer.Location).First(customer => customer.CustomerId == id));
         }
         catch (Exception ex) {
-            throw new RepositoryException("GetCustomers - Er is een fout opgetreden", ex);
+            throw new RepositoryException("GeefGebruiker - Er is een fout opgetreden", ex);
         }
     }
 
     public List<Customer> GetAllCustomers() {
         try {
-            return _context.Customer
-                .Include(g => g.Location)
-                .Where(g => g.Deleted == false)
-                .Select(CustomerMapper.MapToDomain)
-                .ToList();
+            return _context.Customer.Include(customer => customer.Location).Where(customer => !customer.Deleted)
+                .Select(CustomerMapper.MapToDomain).ToList();
         }
         catch (Exception ex) {
-            throw new RepositoryException("GetAllCustomers - Er is een fout opgetreden", ex);
+            throw new RepositoryException("GeefAlleGebruikers - Er is een fout opgetreden", ex);
         }
     }
 
@@ -72,11 +68,8 @@ public class CustomerRepository : ICustomerRepository {
         try {
             _context.Customer.Add(CustomerMapper.MapToDB(customer, _context));
             SaveAndClear();
-            return CustomerMapper
-                .MapToDomain(_context.Customer
-                    .Include(g => g.Location)
-                    .OrderBy(g => g.CustomerId)
-                    .Last());
+            return CustomerMapper.MapToDomain(_context.Customer.Include(customer => customer.Location)
+                .OrderBy(customer => customer.CustomerId).Last());
         }
         catch (Exception ex) {
             throw new RepositoryException("AddCustomer - Er is een fout opgetreden", ex);
@@ -88,7 +81,17 @@ public class CustomerRepository : ICustomerRepository {
             return _context.Customer.Any(c => c.CustomerId == id);
         }
         catch (Exception ex) {
-            throw new RepositoryException("CustomerExists - Er is een fout opgetreden", ex);
+            throw new RepositoryException("CustomerExists customerRepository - Er is een fout opgetreden");
         }
     }
+
+    public bool CustomerHasReservation(int customerId) {
+        try
+        {
+            return _context.Reservation.Any(r => r.CustomerData.CustomerId == customerId);
+        }
+        catch (Exception ex)
+        {
+            throw new RepositoryException("GebruikerHeeftReservaties - Er is een fout opgetreden", ex);
+        }    }
 }

@@ -18,14 +18,14 @@ public class ReservationMapper {
     }
 
     public static Reservation MapToDomain(
-        ReservationOutputDTO reservation) {
+        ReservationOutputDTO reservation, Table table, Customer customer, Restaurant restaurant) {
         return new Reservation(
-            reservation.Customer,
-            reservation.Restaurant,
+            customer,
+            restaurant,
             reservation.Capacity,
             reservation.Date,
             reservation.Time,
-            reservation.Tablenumber
+            table.TableNumber
         );
     }
 }

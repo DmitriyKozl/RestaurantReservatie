@@ -40,10 +40,12 @@ public class ReservationManager {
         }
     }
 
-    public List<Reservation> GetPersonalReservations(int customerId) {
-        if (customerId <= 0) throw new ReservationManagerException("CustomerId cannot be 0 or lower.");
-
-        return _reservationRepository.GetPersonalReservations(customerId);
+    public List<Reservation> GetReservationForCustomerWithDate(Customer customer, DateTime? start, DateTime? end) {
+        if (customer.CustomerId <= 0) throw new ReservationManagerException("Id moet groter zijn dan 0.");
+        if (start.HasValue && end.HasValue) return _reservationRepository.GetReservationForCustomerWithDate(customer.CustomerId, start, end);
+        if (start.HasValue) return _reservationRepository.GetReservationFromCustomerWithDate(customer.CustomerId, start);
+        if (end.HasValue) return _reservationRepository.GetReservationFromCustomerWithDate(customer.CustomerId , end);
+        return _reservationRepository.GetReservationFromCustomer(customer);
     }
 
     public Reservation UpdateReservation(Reservation reservation) {
@@ -66,6 +68,13 @@ public class ReservationManager {
     }
     
     public bool ReservationExists(int id) {
-        return _reservationRepository.ReservationExists(id);
+        if (id <= 0) throw new ReservationManagerException("Id moet groter zijn dan 0.");
+        return _reservationRepository.ReservationExists(id);    }
+    
+    public Reservation GetReservation(int id)
+    {
+        if (id <= 0) throw new ReservationManagerException("Id moet groter zijn dan 0.");
+        if (!_reservationRepository.ReservationExists(id)) throw new ReservationManagerException("Reservatie bestaat niet.");
+        return _reservationRepository.GetReservation(id);
     }
 }
