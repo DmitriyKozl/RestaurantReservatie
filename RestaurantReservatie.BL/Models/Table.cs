@@ -9,8 +9,11 @@ public class Table {
         public int RestaurantID { get;  set; }
         public int TableNumber { get;  set; }
         
-        public bool isReserved{ get; set; }
-        
+        public Table(int chairs, int tableNumber)
+        {
+            SetChairs(chairs);
+            SetTableNumber(tableNumber);
+        }        
         
         public Table(int chairs, int tableNumber, int restaurantId)
         {

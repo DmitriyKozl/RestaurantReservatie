@@ -50,7 +50,7 @@ public class CustomerRepository : ICustomerRepository {
                 .Include(customer => customer.Location).First(customer => customer.CustomerId == id));
         }
         catch (Exception ex) {
-            throw new RepositoryException("GeefGebruiker - Er is een fout opgetreden", ex);
+            throw new RepositoryException("CustomerRepository GetCustomer - Er is een fout opgetreden", ex);
         }
     }
 
@@ -72,7 +72,7 @@ public class CustomerRepository : ICustomerRepository {
                 .OrderBy(customer => customer.CustomerId).Last());
         }
         catch (Exception ex) {
-            throw new RepositoryException("AddCustomer - Er is een fout opgetreden", ex);
+            throw new RepositoryException("CustomerRepository - Er is een fout opgetreden", ex);
         }
     }
 

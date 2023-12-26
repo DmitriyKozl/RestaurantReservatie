@@ -1,4 +1,5 @@
 ﻿using RestaurantReservatie.BL.Models;
+using RestaurantReservatie.Rest.Models.Input;
 using RestaurantReservatie.Rest.Models.Output;
 
 namespace RestaurantReservatie.Rest.Mappers;
@@ -12,12 +13,15 @@ public class CustomerMapper {
             customer.Number, customer.Location);
     }
 
-    public static Customer MapToDomain(CustomerOutputDTO customerOutputDto) {
+    public static Customer MapToDomain(CustomerInputDTO customerInputDto) {
         return new Customer(
-            customerOutputDto.CustomerID,
-            customerOutputDto.Name, 
-            customerOutputDto.PhoneNumber,
-            customerOutputDto.Location, 
-            customerOutputDto.Email);
+            customerInputDto.Name,
+            customerInputDto.PhoneNumber,
+            new Location(
+                customerInputDto.PostalCode, 
+                customerInputDto.City,
+                customerInputDto.Street,
+                customerInputDto.HouseNumber),
+            customerInputDto.Email);
     }
 }

@@ -14,32 +14,36 @@ public class CustomerMapper {
 
 
     public static Customer MapToDomain(Customer_Data customerdb) {
-        try
-        {
-            return new Customer(customerdb.CustomerId, customerdb.Name, customerdb.Email, LocationMapper.MapToDomain(customerdb.Location), customerdb.Phone);
+        try {
+            return new Customer(
+                customerdb.CustomerId,
+                customerdb.Name,
+                customerdb.Phone,
+                LocationMapper.MapToDomain(customerdb.Location),
+                customerdb.Email);
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             throw new MapperException("MapToDomain", e);
         }
     }
 
     public static Customer_Data MapToDB(Customer customer, RestaurantReservatieContext context) {
         try {
-            Customer_Data g = context.Customer.Find(customer.CustomerId);
+            Customer_Data c = context.Customer.Find(customer.CustomerId);
             Location_Data l =
                 context.Location
-                    .FirstOrDefault(loc => loc.StreetName == customer.Location.Street
-                                           && loc.HouseNumber == customer.Location.HouseNumber
-                                           && loc.City == customer.Location.City
-                                           && int.Parse(loc.PostalCode) == int.Parse(customer.Location.PostalCode)) ??
-                throw new InvalidOperationException();
-            if (g is not null) {
-                g.Name = customer.Name;
-                g.Email = customer.Email;
-                g.Phone = customer.Number;
-                g.Location = l;
-                return g;
+                    .FirstOrDefault(loc =>
+                        loc.StreetName == customer.Location.Street
+                        && loc.HouseNumber == customer.Location.HouseNumber
+                        && loc.City == customer.Location.City
+                        && loc.PostalCode == customer.Location.PostalCode);
+            if (l == null) l = LocationMapper.MapToDB(customer.Location, context);
+            if (c is not null) {
+                c.Name = customer.Name;
+                c.Email = customer.Email;
+                c.Phone = customer.Number;
+                c.Location = l;
+                return c;
             }
 
             return new Customer_Data(customer.Name, customer.Email, customer.Number,

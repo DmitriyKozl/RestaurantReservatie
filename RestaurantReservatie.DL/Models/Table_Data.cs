@@ -3,7 +3,7 @@
 namespace RestaurantReservatie.DL.Models; 
 
 public class Table_Data {
-    [Key]
+    [Key ]
     public int ID { get; set; }
     [Required]
     public int Capacity { get; set; }

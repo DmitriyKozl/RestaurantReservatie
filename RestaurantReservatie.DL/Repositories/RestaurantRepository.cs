@@ -42,12 +42,15 @@ public class RestaurantRepository : IRestaurantRepository {
 
     public Restaurant GetRestaurants(int id) {
         try {
-            return RestaurantMapper.MapToDomain(_context.Restaurant
-                .Include(r => r.Location).Include(r => r.Table)
-                .Where(r => r.RestaurantID == id && r.Deleted == false).FirstOrDefault());
+            return RestaurantMapper
+                .MapToDomain(_context.Restaurant
+                    .Include(r => r.Location)
+                    .Include(r => r.Table)
+                    .Where(r => r.RestaurantID == id && r.Deleted == false)
+                    .FirstOrDefault());
         }
         catch (Exception ex) {
-            throw new RepositoryException("GeefRestaurant - Er is een fout opgetreden", ex);
+            throw new RepositoryException("RestaurantRepository GeefRestaurant - Er is een fout opgetreden", ex);
         }
     }
 
@@ -59,7 +62,7 @@ public class RestaurantRepository : IRestaurantRepository {
             _context.SaveChanges();
         }
         catch (Exception ex) {
-            throw new RepositoryException("DeleteRestaurant - Er is een fout opgetreden", ex);
+            throw new RepositoryException("RestaurantRepository DeleteRestaurant - Er is een fout opgetreden", ex);
         }
     }
 
@@ -186,13 +189,15 @@ public class RestaurantRepository : IRestaurantRepository {
         }
     }
 
-    public Table GetTable(int TableId, int restaurantId) {
+    public Table GetTable( int restaurantId,int tableId) {
         try {
-            return TableMapper.MapToDomain(_context.Table.FirstOrDefault(Table =>
-                Table.TableNumber == TableId && Table.RestaurantID == restaurantId));
+            return TableMapper.MapToDomain(
+                _context.Table
+                .FirstOrDefault(tabledata =>
+                tabledata.ID == tableId && tabledata.RestaurantID == restaurantId));
         }
         catch (Exception ex) {
-            throw new RepositoryException("GetTable - Er is een fout opgetreden", ex);
+            throw new RepositoryException("RestaurantRepository: GetTable - Er is een fout opgetreden", ex);
         }
     }
 
@@ -218,7 +223,10 @@ public class RestaurantRepository : IRestaurantRepository {
         }
     }
 
-    public List<Table> GetTableByCapacity(int restaurantId, DateTime date, int capacity) {
+    public List<Table> GetTableByCapacity(int restaurantId, DateTime date, int capacity) 
+    
+    
+    {
         try {
             return _context.Table.Where(t => t.RestaurantID == restaurantId && t.Capacity >= capacity)
                     .OrderBy(t => t.Capacity)

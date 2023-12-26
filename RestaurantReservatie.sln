@@ -1,14 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantReservatie.DL", "RestaurantReservatie.DL\RestaurantReservatie.DL.csproj", "{5577B2D2-CE57-4D41-8B2F-5BD8A996BFDC}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantReservatie.DL", "RestaurantReservatie.DL\RestaurantReservatie.DL.csproj", "{5577B2D2-CE57-4D41-8B2F-5BD8A996BFDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantReservatie.BL", "RestaurantReservatie.BL\RestaurantReservatie.BL.csproj", "{C63E87D4-B3B0-4132-A8BD-16B2ABAE1CC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantReservatie.BL", "RestaurantReservatie.BL\RestaurantReservatie.BL.csproj", "{C63E87D4-B3B0-4132-A8BD-16B2ABAE1CC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantReservatie.Rest", "RestaurantReservatie.Rest\RestaurantReservatie.Rest.csproj", "{10CC422F-CDD9-43E3-A42A-E7FE69B862EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantReservatie.Rest", "RestaurantReservatie.Rest\RestaurantReservatie.Rest.csproj", "{10CC422F-CDD9-43E3-A42A-E7FE69B862EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantReservatie.XUnit", "RestaurantReservatie.XUnit\RestaurantReservatie.XUnit.csproj", "{8E13BE80-3817-44EC-BCC2-7016DAE44184}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestEFLayer", "TestEFLayer\TestEFLayer.csproj", "{1EB0078D-61AB-4DA6-94AD-692BE82AB24A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestEFLayer", "TestEFLayer\TestEFLayer.csproj", "{1EB0078D-61AB-4DA6-94AD-692BE82AB24A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantReservatie.Xunit", "RestaurantReservatie.Xunit\RestaurantReservatie.Xunit.csproj", "{8D884B37-2F07-496F-A8BA-061E2D730AE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,13 +31,16 @@ Global
 		{10CC422F-CDD9-43E3-A42A-E7FE69B862EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10CC422F-CDD9-43E3-A42A-E7FE69B862EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10CC422F-CDD9-43E3-A42A-E7FE69B862EF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8E13BE80-3817-44EC-BCC2-7016DAE44184}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8E13BE80-3817-44EC-BCC2-7016DAE44184}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8E13BE80-3817-44EC-BCC2-7016DAE44184}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8E13BE80-3817-44EC-BCC2-7016DAE44184}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1EB0078D-61AB-4DA6-94AD-692BE82AB24A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1EB0078D-61AB-4DA6-94AD-692BE82AB24A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EB0078D-61AB-4DA6-94AD-692BE82AB24A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EB0078D-61AB-4DA6-94AD-692BE82AB24A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D884B37-2F07-496F-A8BA-061E2D730AE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D884B37-2F07-496F-A8BA-061E2D730AE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D884B37-2F07-496F-A8BA-061E2D730AE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D884B37-2F07-496F-A8BA-061E2D730AE0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

@@ -52,8 +52,6 @@ public class Customer {
     public void ZetTelefoonnummer(string number) {
         if (string.IsNullOrWhiteSpace(number))
             throw new CustomerException("ZetTelefoonnummer - Telefoonnummer mag niet leeg zijn");
-        if (!Regex.IsMatch(number, @"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$"))
-            throw new CustomerException("ZetTelefoonnummer - Telefoonnummer is niet geldig");
         Number = number;
     }
 }

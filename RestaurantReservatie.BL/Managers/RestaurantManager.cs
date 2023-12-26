@@ -5,7 +5,7 @@ using RestaurantReservatie.BL.Models;
 namespace RestaurantReservatie.BL.Managers;
 
 public class RestaurantManager {
-    IRestaurantRepository _restaurantRepository;
+    IRestaurantRepository  _restaurantRepository;
     IReservationRepository _reservationRepository;
 
     public RestaurantManager(IRestaurantRepository restaurantRepository, IReservationRepository reservationRepository) {
@@ -72,7 +72,7 @@ public class RestaurantManager {
             return _restaurantRepository.GetRestaurants(id);
         }
         catch (Exception ex) {
-            throw new RestaurantManagerException("GetRestaurant - Er is een fout opgetreden", ex);
+            throw new RestaurantManagerException("RestaurantManager GetRestaurant - Er is een fout opgetreden", ex);
         }
     }
 
@@ -133,7 +133,7 @@ public class RestaurantManager {
         }
     }
 
-    public Table GetTable(int restaurantId, int tableId) {
+    public Table GetTable(int restaurantId,int tableId) {
         if (tableId == null) throw new RestaurantManagerException("GetTable - Tafel mag niet null zijn");
         if (restaurantId == null) throw new RestaurantManagerException("GetTable - Restaurant mag niet null zijn");
         if (!_restaurantRepository.RestaurantExists(restaurantId))
@@ -147,6 +147,7 @@ public class RestaurantManager {
             throw new RestaurantManagerException("TableExists - Restaurant bestaat niet");
         return _restaurantRepository.TableExists(table);
     }
+    
 
     #endregion
 

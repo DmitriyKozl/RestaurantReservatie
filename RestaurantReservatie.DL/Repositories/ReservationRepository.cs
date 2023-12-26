@@ -72,7 +72,6 @@ public class ReservationRepository : IReservationRepository {
             throw new RepositoryException("VerwijderReservatie - Er is een fout opgetreden", ex);
         }
     }
-
     public List<Reservation> GetPersonalReservations(Customer customer) {
         try {
             return _context.Reservation.Where(r => r.CustomerData.CustomerId == customer.CustomerId)
@@ -82,16 +81,22 @@ public class ReservationRepository : IReservationRepository {
             throw new RepositoryException("GeefReservatiesVanGebruiker - Er is een fout opgetreden", ex);
         }
     }
-
     public Reservation GetReservation(int id) {
         try {
-            return ReservationMapper.MapToDomain(_context.Reservation.Find(id));
+            return ReservationMapper
+                .MapToDomain(_context.Reservation
+                .Include(r => r.RestaurantData)
+                .ThenInclude(r => r.Location)
+                .Include(r => r.RestaurantData.Table)
+                .Include(r => r.CustomerData)
+                .ThenInclude(c => c.Location)
+                .Where(r => r.Id == id)
+                .FirstOrDefault());
         }
         catch (Exception ex) {
-            throw new RepositoryException("GeefReservatie - Er is een fout opgetreden", ex);
+            throw new RepositoryException("ReservationRepository: GeefReservatie - Er is een fout opgetreden", ex);
         }
     }
-
     public List<Reservation> GetRestaurantReservations(int restaurantId) {
         try {
             return _context.Reservation.Include(r => r.RestaurantData).ThenInclude(r => r.Location)
@@ -104,7 +109,6 @@ public class ReservationRepository : IReservationRepository {
             throw new RepositoryException("GeefReservatiesVanRestaurant - Er is een fout opgetreden", ex);
         }
     }
-
     public List<Reservation> GetReservationByDate(DateTime? start, DateTime? end) {
         try {
             return _context.Reservation.Include(r => r.RestaurantData)

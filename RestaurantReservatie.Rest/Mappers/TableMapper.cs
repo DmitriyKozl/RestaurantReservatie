@@ -1,5 +1,6 @@
 ﻿using RestaurantReservatie.BL.Exceptions;
 using RestaurantReservatie.BL.Models;
+using RestaurantReservatie.Rest.Models.Input;
 using RestaurantReservatie.Rest.Models.Output;
 
 namespace RestaurantReservatie.Rest.Mappers; 
@@ -16,7 +17,7 @@ public class TableMapper {
             throw new MapperException("MapFromDomain", e);
         }
     }
-    public static Table MapToDomain(TableOutputDTO tafel, int restaurantId)
+    public static Table MapToDomain(TableInputDTO tafel, int restaurantId)
     {
         try
         {

@@ -1,11 +1,9 @@
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
 using RestaurantReservatie.BL.Interfaces;
 using RestaurantReservatie.BL.Managers;
-using RestaurantReservatie.DL.Data;
 using RestaurantReservatie.DL.Repositories;
+using RestaurantReservatie.Rest.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
@@ -29,18 +27,21 @@ builder.Services.AddSingleton<CustomerManager>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-
-
 var app = builder.Build();
+
+ILogger logger = builder.Logging.Services.BuildServiceProvider().GetRequiredService<ILogger<Program>>();
+
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment()) {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseLogURLMiddleware();
+
 }
 
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

@@ -1,4 +1,5 @@
 ﻿using RestaurantReservatie.BL.Models;
+using RestaurantReservatie.Rest.Models.Input;
 using RestaurantReservatie.Rest.Models.Output;
 
 namespace RestaurantReservatie.Rest.Mappers;
@@ -18,7 +19,7 @@ public class ReservationMapper {
     }
 
     public static Reservation MapToDomain(
-        ReservationOutputDTO reservation, Table table, Customer customer, Restaurant restaurant) {
+        ReservationInputDTO reservation, Table table, Customer customer, Restaurant restaurant) {
         return new Reservation(
             customer,
             restaurant,

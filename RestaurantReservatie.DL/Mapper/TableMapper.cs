@@ -6,9 +6,9 @@ using RestaurantReservatie.DL.Models;
 namespace RestaurantReservatie.DL.Mapper;
 
 public class TableMapper {
-    public static Table MapToDomain(Table_Data tafel) {
+    public static Table MapToDomain(Table_Data table) {
         try {
-            return new Table(tafel.ID, tafel.Capacity, tafel.TableNumber, tafel.RestaurantID);
+            return new Table(table.ID, table.Capacity, table.TableNumber, table.RestaurantID);
         }
         catch (Exception ex) {
             throw new MapperException("MapToDomain", ex);
@@ -17,13 +17,14 @@ public class TableMapper {
 
     public static Table_Data MapToDB(Table tafel, RestaurantReservatieContext context) {
         try {
-            Table_Data t = context.Table.Find(tafel.TableId) ?? throw new MapperException("MapToDomain");
+            Table_Data t = context.Table.Find(tafel.TableId);
             if (t != null) {
                 t.Capacity = tafel.Chairs;
                 t.TableNumber = tafel.TableNumber;
                 t.RestaurantID = tafel.RestaurantID;
                 return t;
             }
+
             return new Table_Data(tafel.Chairs, tafel.TableNumber, tafel.RestaurantID);
         }
         catch (Exception ex) {

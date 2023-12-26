@@ -6,7 +6,7 @@ using RestaurantReservatie.DL.Models;
 namespace RestaurantReservatie.DL.Mapper;
 
 public class ReservationMapper {
-    public static Reservation MapToDomain(Reservation_Data? reservation) {
+    public static Reservation MapToDomain(Reservation_Data reservation) {
         try {
             return new Reservation(
                 reservation.Id,
@@ -24,7 +24,7 @@ public class ReservationMapper {
 
     public static Reservation_Data MapToDB(Reservation reservation, RestaurantReservatieContext context) {
         try {
-            Reservation_Data? r = context.Reservation.Find(reservation.Id);
+            Reservation_Data r = context.Reservation.Find(reservation.Id);
             
             if (r is not null) {
                 r.Party = reservation.NumberOfPersons;
