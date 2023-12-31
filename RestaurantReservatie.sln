@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantReservatie.BL", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantReservatie.Rest", "RestaurantReservatie.Rest\RestaurantReservatie.Rest.csproj", "{10CC422F-CDD9-43E3-A42A-E7FE69B862EF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestEFLayer", "TestEFLayer\TestEFLayer.csproj", "{1EB0078D-61AB-4DA6-94AD-692BE82AB24A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantReservatie.Client", "RestaurantReservatie.Client\RestaurantReservatie.Client.csproj", "{1EB0078D-61AB-4DA6-94AD-692BE82AB24A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantReservatie.Xunit", "RestaurantReservatie.Xunit\RestaurantReservatie.Xunit.csproj", "{8D884B37-2F07-496F-A8BA-061E2D730AE0}"
 EndProject

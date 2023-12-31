@@ -9,9 +9,8 @@ public class Reservation_Data {
     [Required] public Restaurant_Data RestaurantData { get; set; }
     [Required] public Customer_Data CustomerData { get; set; }
     [Required] public int Party { get; set; }
-    [Required] public DateTime Date { get; set; }
+    [Required]  public DateTime Date { get; set; } // Combined date and time
     
-    [Required] public DateTime Time { get; set; }
     [Required] public int TableNumber { get; set; }
 
     public bool Deleted { get; set; }

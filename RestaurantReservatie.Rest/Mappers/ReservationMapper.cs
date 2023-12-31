@@ -1,4 +1,5 @@
-﻿using RestaurantReservatie.BL.Models;
+﻿using System.Globalization;
+using RestaurantReservatie.BL.Models;
 using RestaurantReservatie.Rest.Models.Input;
 using RestaurantReservatie.Rest.Models.Output;
 
@@ -12,8 +13,8 @@ public class ReservationMapper {
             reservation.Restaurant,
             reservation.Customer,
             reservation.NumberOfPersons,
-            reservation.Date,
-            reservation.Time,
+            reservation.Date, 
+            reservation.Date.ToString("HH:mm"), // Extracting time part as a string
             reservation.TableNumber
         );
     }

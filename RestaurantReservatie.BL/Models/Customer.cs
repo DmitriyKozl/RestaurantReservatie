@@ -3,7 +3,8 @@ using RestaurantReservatie.BL.Exceptions;
 
 namespace RestaurantReservatie.BL.Models;
 
-public class Customer {
+public class Customer
+{
     public string Email { get; set; }
     public string Number { get; set; }
 
@@ -13,45 +14,56 @@ public class Customer {
 
     public Location Location { get; set; }
 
-    public Customer(int customerId, string name, string number, Location location, string email) {
-        ZetNaam(name);
-        ZetId(customerId);
-        ZetEmail(email);
-        ZetTelefoonnummer(number);
+    public Customer(int customerId, string name, string number, Location location, string email)
+    {
+        SetName(name);
+        SetId(customerId);
+        SetEmail(email);
+        SetPhone(number);
         Location = location;
     }
 
-    public Customer(string name, string number, Location location, string email) {
-        ZetNaam(name);
-        ZetEmail(email);
-        ZetTelefoonnummer(number);
+    public Customer(string name, string number, Location location, string email)
+    {
+        SetName(name);
+        SetEmail(email);
+        SetPhone(number);
         Location = location;
     }
 
-    public Customer() { }
+    public Customer()
+    {
+    }
+
     //Naam (mag niet leeg zijn)
-    public void ZetNaam(string name) {
-        if (string.IsNullOrWhiteSpace(name)) throw new CustomerException("ZetNaam - Naam mag niet leeg zijn");
+    public void SetName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name)) throw new CustomerException("SetName - Naam mag niet leeg zijn");
         Name = name;
     }
+
 //ls de gebruiker zich heeft geregistreerd dan ontvangt hij een klantnummer (numeriek en groter dan 0)
-    public void ZetId(int id) {
-        if (id <= 0) throw new CustomerException("ZetId - Id < 0");
+    public void SetId(int id)
+    {
+        if (id <= 0) throw new CustomerException("SetId - Id < 0");
         CustomerId = id;
     }
+
 //Email (basis check uitvoeren)
-    public void ZetEmail(string email) {
-        if (string.IsNullOrWhiteSpace(email)) throw new CustomerException("ZetEmail - Email mag niet leeg zijn");
+    public void SetEmail(string email)
+    {
+        if (string.IsNullOrWhiteSpace(email)) throw new CustomerException("SetEmail - Email mag niet leeg zijn");
         if (!Regex.IsMatch(email,
                 @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"))
             throw new CustomerException(
-                "ZetEmail - Email is niet geldig");
+                "SetEmail - Email is niet geldig");
         Email = email;
     }
 
-    public void ZetTelefoonnummer(string number) {
+    public void SetPhone(string number)
+    {
         if (string.IsNullOrWhiteSpace(number))
-            throw new CustomerException("ZetTelefoonnummer - Telefoonnummer mag niet leeg zijn");
+            throw new CustomerException("SetPhone - Telefoonnummer mag niet leeg zijn");
         Number = number;
     }
 }

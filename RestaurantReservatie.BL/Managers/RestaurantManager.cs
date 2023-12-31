@@ -81,6 +81,28 @@ public class RestaurantManager {
         if (capacity <= 0) throw new RestaurantManagerException("GetTableByCapacity - Aantal plaatsen moet groter zijn dan 0");
         return _restaurantRepository.GetTableByCapacity(restaurantId, date, capacity);
     }
+    
+    public List<Restaurant> GetRestaurantByCuisine(string cuisine) {
+        try {
+            if (cuisine == null)
+                throw new RestaurantManagerException("GetRestaurantByCuisine - Keuken mag niet null zijn");
+            return _restaurantRepository.GetRestaurantByCuisine(cuisine);
+        }
+        catch (Exception ex) {
+            throw new RestaurantManagerException("GetRestaurantByCuisine - Er is een fout opgetreden", ex);
+        }
+    }
+    
+    public Restaurant GetRestaurantByName(string name) {
+        try {
+            if (name == null)
+                throw new RestaurantManagerException("GetRestaurantByName - Naam mag niet null zijn");
+            return _restaurantRepository.GetRestaurantByName(name);
+        }
+        catch (Exception ex) {
+            throw new RestaurantManagerException("GetRestaurantByName - Er is een fout opgetreden", ex);
+        }
+    }
 
     #endregion
 

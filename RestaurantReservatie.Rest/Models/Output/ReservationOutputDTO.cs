@@ -1,4 +1,5 @@
-﻿using RestaurantReservatie.BL.Models;
+﻿using System.Globalization;
+using RestaurantReservatie.BL.Models;
 
 namespace RestaurantReservatie.Rest.Models.Output; 
 
@@ -12,17 +13,18 @@ public class ReservationOutputDTO {
 
     public DateTime Date { get; set; }
     
-    public DateTime Time { get; set; }
+    public string Time { get; set; }
 
     public int Tablenumber { get; set; }
     
-    public ReservationOutputDTO(int reservationId, Restaurant restaurant, Customer customer, int capacity, DateTime date,DateTime time, int tablenumber)
+    public ReservationOutputDTO(int reservationId, Restaurant restaurant, Customer customer, int capacity, DateTime date,string time, int tablenumber)
     {
         ReservationId = reservationId;
         Restaurant = restaurant;
         Customer = customer;
-        Date = date;
+        Date = date.Date;
         Time = time;
+
         Capacity = capacity;
         Tablenumber = tablenumber;
     }

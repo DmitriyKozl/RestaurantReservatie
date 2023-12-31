@@ -8,6 +8,8 @@ public interface IRestaurantRepository {
     Restaurant AddRestaurant(Restaurant restaurant);
     List<Restaurant> GetAllRestaurants();
     Restaurant GetRestaurants(int id);
+    
+    Restaurant GetRestaurantByName(string name);
     void DeleteRestaurant(int id);
     Restaurant UpdateRestaurant(Restaurant restaurant);
 

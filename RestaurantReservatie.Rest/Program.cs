@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();
-string connectionString = "Data Source=.\\KUTDATABASE;Initial Catalog=ReservatieBeheer;Integrated Security=True;Trust Server Certificate=True";
+string connectionString = "Data Source=.\\BLA;Initial Catalog=ReservatieDB;Integrated Security=True;Trust Server Certificate=True";
 
 // Add services to the container.
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

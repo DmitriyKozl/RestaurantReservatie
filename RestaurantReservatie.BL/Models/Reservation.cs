@@ -1,8 +1,10 @@
-﻿using RestaurantReservatie.BL.Exceptions;
+﻿using System.Globalization;
+using RestaurantReservatie.BL.Exceptions;
 
 namespace RestaurantReservatie.BL.Models;
 
-public class Reservation {
+public class Reservation
+{
     public int Id { get; set; }
     public Customer Customer { get; set; }
     public Restaurant Restaurant { get; set; }
@@ -13,35 +15,41 @@ public class Reservation {
 
 
     public Reservation(int id, Customer customer, Restaurant restaurant, int numberOfPersons, DateTime date,
-        DateTime time, int tableNumber) {
+        string time, int tableNumber)
+    {
         Id = id;
         Customer = customer;
         Restaurant = restaurant;
         NumberOfPersons = numberOfPersons;
         Date = date;
-        Time = time;
+        Time = DateTime.ParseExact(time, "HH:mm", CultureInfo.InvariantCulture);
+        
         TableNumber = tableNumber;
     }
 
-    public Reservation(Customer customer, Restaurant restaurant, int numberOfPersons, DateTime date, DateTime time,
-        int tableNumber) {
+    public Reservation(Customer customer, Restaurant restaurant, int numberOfPersons, DateTime date, string time,
+        int tableNumber)
+    {
         Customer = customer;
         Restaurant = restaurant;
         NumberOfPersons = numberOfPersons;
         Date = date;
-        Time = time;
+        Time = DateTime.ParseExact(time, "HH:mm", CultureInfo.InvariantCulture);
         TableNumber = tableNumber;
     }
 
-    public Reservation() {
+    public Reservation()
+    {
     }
-    
-    public void SetId(int id) {
+
+    public void SetId(int id)
+    {
         if (id <= 0) throw new ReservationException("SetId - Id < 0");
         Id = id;
     }
 
-    public override string ToString() {
+    public override string ToString()
+    {
         return
             $"{nameof(Id)}: {Id}, {nameof(Customer)}: {Customer}, {nameof(Restaurant)}: {Restaurant}, {nameof(NumberOfPersons)}: {NumberOfPersons}, {nameof(Date)}: {Date}, {nameof(Time)}: {Time}, {nameof(TableNumber)}: {TableNumber}";
     }

@@ -59,7 +59,7 @@ public class RestaurantRepository : IRestaurantRepository {
             Restaurant_Data r = _context.Restaurant.Find(id);
             r.Deleted = true;
             _context.Restaurant.Update(r);
-            _context.SaveChanges();
+            SaveAndClear();
         }
         catch (Exception ex) {
             throw new RepositoryException("RestaurantRepository DeleteRestaurant - Er is een fout opgetreden", ex);
@@ -69,7 +69,7 @@ public class RestaurantRepository : IRestaurantRepository {
     public Restaurant UpdateRestaurant(Restaurant restaurant) {
         try {
             _context.Restaurant.Update(RestaurantMapper.MapToDB(restaurant, _context));
-            _context.SaveChanges();
+            SaveAndClear();
             return RestaurantMapper.MapToDomain(_context.Restaurant.Include(r => r.Table)
                 .Where(r => r.RestaurantID == restaurant.RestaurantId).FirstOrDefault());
         }
@@ -90,6 +90,18 @@ public class RestaurantRepository : IRestaurantRepository {
         }
     }
 
+    public Restaurant GetRestaurantByName(string name) {
+        try {
+            return RestaurantMapper.MapToDomain(_context.Restaurant
+                .Include(r => r.Location)
+                .Include(r => r.Table)
+                .Where(r => r.RestaurantName == name && r.Deleted == false)
+                .FirstOrDefault());
+        }
+        catch (Exception ex) {
+            throw new RepositoryException("GeefRestaurant - Er is een fout opgetreden", ex);
+        }
+    }
     public List<Restaurant> GetRestaurantByLocation(string city) {
         try {
             return _context.Restaurant.Include(r => r.Location).Include(r => r.Table)
