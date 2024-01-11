@@ -6,7 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-        <RootNamespace>TestEFLayer</RootNamespace>
+        <RootNamespace>RestaurantReservatie.Client</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

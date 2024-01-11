@@ -1,4 +1,4 @@
-﻿namespace TestEFLayer.Output;
+﻿namespace RestaurantReservatie.Client.Output;
 
 public class RestaurantOutputDTO
 {

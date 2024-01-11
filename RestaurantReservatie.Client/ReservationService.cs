@@ -3,13 +3,14 @@ using System.Net.Http.Json;
 using Newtonsoft.Json;
 using RestaurantReservatie.Rest.Models.Input;
 using RestaurantReservatie.Rest.Models.Output;
-using CustomerOutputDTO = TestEFLayer.Output.CustomerOutputDTO;
-using RestaurantOutputDTO = TestEFLayer.Output.RestaurantOutputDTO;
+using CustomerOutputDTO = RestaurantReservatie.Client.Output.CustomerOutputDTO;
+using RestaurantOutputDTO = RestaurantReservatie.Client.Output.RestaurantOutputDTO;
 
 namespace RestaurantReservatie.Client;
 
 public class ReservationService
 {
+
     private HttpClient client;
 
     public ReservationService()
@@ -33,6 +34,7 @@ public class ReservationService
 
         return null;
     }
+
     public async Task<int> GetRestaurantByNameAsync(string name)
     {
         RestaurantOutputDTO restaurant = null;
@@ -46,8 +48,8 @@ public class ReservationService
 
         return -1;
     }
-    
-    
+
+
     public async Task<CustomerOutputDTO> AddUserAsync(CustomerInputDTO user)
     {
         CustomerOutputDTO customerOutputDTO = null;
@@ -59,9 +61,10 @@ public class ReservationService
             customerOutputDTO = JsonConvert.DeserializeObject<CustomerOutputDTO>(json);
             return customerOutputDTO;
         }
+
         return null;
     }
-    
+
     public async Task<ReservationOutputDTO> AddReservationAsync(ReservationInputDTO reservation)
     {
         ReservationOutputDTO reservationOutputDTO = null;
@@ -73,6 +76,9 @@ public class ReservationService
             reservationOutputDTO = JsonConvert.DeserializeObject<ReservationOutputDTO>(json);
             return reservationOutputDTO;
         }
+
         return null;
     }
 }
+
+
